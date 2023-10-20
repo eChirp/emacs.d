@@ -7,15 +7,19 @@
 
 (setq visible-bell t)
 
+(column-number-mode)
+(global-display-line-numbers-mode t)
+
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
-;; Initialize package sources
+
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 			 ("melpa-stable" . "https://stable.melpa.org/packages/")
 			 ("org" . "https://orgmode.org/elpa/")
 			 ("elpa" . "https://elpa.gnu.org/packages/")))
 
+(setq package-enable-at-startup t)
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -27,8 +31,6 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-(column-number-mode)
-(global-display-line-numbers-mode t)
 
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
@@ -38,6 +40,31 @@
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (use-package all-the-icons)
+
+(use-package vhdl-ext
+  :hook ((vhdl-mode . vhdl-ext-mode))
+  :init
+  ;; Can also be set through `M-x RET customize-group RET vhdl-ext':
+  ;; Comment out/remove the ones you do not need
+  (setq vhdl-ext-feature-list
+        '(font-lock
+          xref
+          capf
+          hierarchy
+          eglot
+          lsp
+          flycheck
+          beautify
+          navigation
+          template
+          compilation
+          imenu
+          which-func
+          hideshow
+          time-stamp
+          ports))
+  :config
+  (vhdl-ext-mode-setup))
 
 (use-package ivy
   :diminish
@@ -70,7 +97,7 @@
   :custom ((doom-modeline-height 15)))
 
 (use-package doom-themes)
-(load-theme 'tango-dark)
+(load-theme 'doom-dracula)
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
@@ -108,7 +135,6 @@
     "t" '(:ignore t :which-key "toggles")
     "tt" '(counsel-load-theme :which-key "choose theme")))
 
-
 (use-package evil
   :init
   (setq evil-want-integration t)
@@ -145,17 +171,3 @@
 (rune/leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text"))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ispell-dictionary nil)
- '(package-selected-packages
-   '(hydra evil-collection which-key use-package rainbow-delimiters ivy-rich helpful general evil doom-themes doom-modeline counsel command-log-mode all-the-icons)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
