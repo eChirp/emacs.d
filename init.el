@@ -146,11 +146,9 @@
   (evil-mode 1)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
   (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
-
   ;; Use visual line motions even outside of visual line buffers
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
 
@@ -158,7 +156,6 @@
   :after evil
   :config
   (evil-collection-init))
-
 
 (use-package hydra)
 
@@ -171,3 +168,51 @@
 (rune/leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text"))
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("8c7e832be864674c220f9a9361c851917a93f921fedb7717b1b5ece47690c098" default))
+ '(ispell-dictionary nil)
+ '(package-selected-packages
+   '(evil-collection evil general helpful ivy-rich which-key rainbow-delimiters doom-themes doom-modeline counsel ivy vhdl-ext all-the-icons))
+ '(user-full-name "eChirp")
+ '(user-mail-address "tmaintz91@gmail.com")
+ '(vhdl-basic-offset 4)
+ '(vhdl-clock-edge-condition 'function)
+ '(vhdl-copyright-string
+   "-------------------------------------------------------------------------------\12-- Copyright (c) <year> all rights reserved\12")
+ '(vhdl-file-header
+   "\12-------------------------------------------------------------------------------\12-- File : <filename>\12<projectdesc>-------------------------------------------------------------------------------\12-- Description: <cursor>\12<copyright>-------------------------------------------------------------------------------\12\12")
+ '(vhdl-file-name-case 'downcase)
+ '(vhdl-forbidden-words '("bit"))
+ '(vhdl-highlight-forbidden-words t)
+ '(vhdl-include-port-comments t)
+ '(vhdl-indent-tabs-mode t)
+ '(vhdl-intelligent-tab t)
+ '(vhdl-modify-date-on-saving nil)
+ '(vhdl-reset-active-high t)
+ '(vhdl-reset-kind 'sync)
+ '(vhdl-speedbar-auto-open t)
+ '(vhdl-speedbar-display-mode 'project)
+ '(vhdl-standard '(8 (math)))
+ '(vhdl-stutter-mode t)
+ '(vhdl-testbench-create-files 'separate)
+ '(vhdl-testbench-declarations
+   "signal slClk : std_logic := '1';\12signal slReset : std_logic := '0';\12")
+ '(vhdl-testbench-initialize-signals t)
+ '(vhdl-testbench-statements
+   "\12  CreateClock(slClk, ktClkPeriod);\12  CreateReset()\12  \12")
+ '(vhdl-underscore-is-part-of-word t)
+ '(vhdl-upper-case-constants nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(font-lock-comment-face ((t (:foreground "#f00"))))
+ '(vhdl-font-lock-function-face ((t (:foreground "Orchid1" :weight bold))))
+ '(vhdl-font-lock-generic-/constant-face ((t (:foreground "BurlyWood1"))))
+ '(vhdl-font-lock-translate-off-face ((t (:foreground "gray")))))
